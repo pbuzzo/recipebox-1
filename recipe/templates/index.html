@@ -4,14 +4,6 @@
     {% for item in data %}
         <li>
             {{ item.title }} | by {{ item.author }}
-            <ul>
-                <li>
-                    {{ item.description }}
-                    <br/>
-                    <br/>
-                    {{ item.instructions }}
-                </li>
-            </ul>
         </li>
         <br/>
     {% endfor %}

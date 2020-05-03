@@ -1,0 +1,11 @@
+{% for item in data %}
+    <ul>
+        <li>
+            {{ item.description }}
+            <br/>
+            {{ item.time_required }}
+            <br/>
+            {{ item.instructions }}
+        </li>
+    </ul>
+{% endfor %}
