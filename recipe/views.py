@@ -17,11 +17,16 @@ def recipe(request):
 
 def recipeadd(request):
     html = 'recipeaddform.html'
+
+    
+
     form = RecipeAddForm()
 
     return render(request, html, {'form': form})
 
 
-def author(request):
-    data = Author.objects.all()
-    return render(request, 'author.html', {'data': data})
+def author(request, id):
+    person = Author.objects.get(id=id)
+    recipes = RecipeItem.objects.filter(author=person)
+    return render(request, 'author.html',
+                  {'author': person, 'recipes': recipes})

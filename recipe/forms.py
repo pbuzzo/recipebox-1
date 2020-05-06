@@ -5,9 +5,9 @@ from recipe.models import Author
 class RecipeAddForm(forms.Form):
     title = forms.CharField(max_length=40)
     author = forms.ModelChoiceField(queryset=Author.objects.all())
-    description = forms.CharField(widget=forms.TextArea)
-    time_required = forms.CharField(max_length=30, default='')
-    instructions = forms.CharField(widget=forms.TextArea)
+    description = forms.CharField(widget=forms.Textarea)
+    time_required = forms.CharField(max_length=30)
+    instructions = forms.CharField(widget=forms.Textarea)
 
 
 '''
