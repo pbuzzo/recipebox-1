@@ -3,7 +3,7 @@
 <ul>
     {% for item in data %}
         <li>
-            {{ item.title }}
+           <a href='/recipe/{{item.id}}'>{{ item.title }}</a> 
         </li>
         <br/>
     {% endfor %}

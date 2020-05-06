@@ -10,8 +10,8 @@ def index(request):
     return render(request, 'index.html', {'data': data})
 
 
-def recipe(request):
-    data = RecipeItem.objects.all()
+def recipe(request, id):
+    data = RecipeItem.objects.get(id=id)
     return render(request, 'recipe.html', {'data': data})
 
 
