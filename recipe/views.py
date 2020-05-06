@@ -9,11 +9,13 @@ def index(request):
     return render(request, 'index.html', {'data': data})
 
 
-def recipe(request):
-    data = RecipeItem.objects.all()
+def recipe(request, id):
+    data = RecipeItem.objects.get(id=id)
     return render(request, 'recipe.html', {'data': data})
 
 
-def author(request):
-    data = Author.objects.all()
-    return render(request, 'author.html', {'data': data})
+def author(request, id):
+    person = Author.objects.get(id=id)
+    recipes = RecipeItem.objects.filter(author=person)
+    return render(request, 'author.html',
+                  {'author': person, 'recipes': recipes})

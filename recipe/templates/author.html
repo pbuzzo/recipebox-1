@@ -1,8 +1,13 @@
-{% for item in data %}
 
-    <h1>{{ item }}</h1>
+    <h1>{{ author }}</h1>
 
-    <p>{{ item.bio }}</p>
+    <p>{{ author.bio }}</p>
 
-    <p>{{ item.id }}</p>
-{% endfor %}
+    <ul>
+        {% for recipe in recipes %}
+        <li>
+            <a href="/recipe/{{recipe.id}}"> {{ recipe.title }} </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/">Home</a>
