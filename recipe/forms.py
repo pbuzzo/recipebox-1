@@ -13,22 +13,3 @@ class RecipeAddForm(forms.Form):
 class AuthorAddForm(forms.Form):
     name = forms.CharField(max_length=40)
     bio = forms.CharField(widget=forms.Textarea)
-'''
-class Author(models.Model):
-    name = models.CharField(max_length=50)
-    bio = models.TextField(default='')
-
-    def __str__(self):
-        return self.name
-
-
-class RecipeItem(models.Model):
-    title = models.CharField(max_length=40)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    description = models.TextField()
-    time_required = models.CharField(max_length=30, default='')
-    instructions = models.TextField()
-
-    def __str__(self):
-        return self.title
-'''
