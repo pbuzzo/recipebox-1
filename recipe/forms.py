@@ -10,6 +10,9 @@ class RecipeAddForm(forms.Form):
     instructions = forms.CharField(widget=forms.Textarea)
 
 
+class AuthorAddForm(forms.Form):
+    name = forms.CharField(max_length=40)
+    bio = forms.CharField(widget=forms.Textarea)
 '''
 class Author(models.Model):
     name = models.CharField(max_length=50)
