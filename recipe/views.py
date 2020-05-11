@@ -24,6 +24,11 @@ def loginview(request):
     return render(request, 'generic_form.html', {'form': form})
 
 
+def logoutview(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('homepage'))
+
+
 def index(request):
     data = RecipeItem.objects.all()
     return render(request, 'index.html', {'data': data})

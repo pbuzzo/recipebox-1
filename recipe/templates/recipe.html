@@ -1,10 +1,14 @@
-    <h1> {{ data.title }} </h1>
-    <a href='/author/{{data.author.id}}'> {{ data.author }} </a>
-    <p>{{ data.description }}</p>
-    <p>{{ data.time_required }}</p>
-    <ul>
-        <li>
-            {{ data.instructions }}
-        </li>
-    </ul>
-    <a href="/">Home</a>
+<h1> {{ data.title }} </h1>
+<a href='/author/{{data.author.id}}'> {{ data.author }} </a>
+<p>{{ data.description }}</p>
+<p>{{ data.time_required }}</p>
+<ul>
+    <li>
+        {{ data.instructions }}
+    </li>
+</ul>
+<a href="/">Home</a>
+<br/>
+<br/>
+<button><a href='/login/'>Login</a></button>
+<button><a href='/logout/'>Logout</a></button>

@@ -1,13 +1,17 @@
 
-    <h1>{{ author }}</h1>
+<h1>{{ author }}</h1>
 
-    <p>{{ author.bio }}</p>
+<p>{{ author.bio }}</p>
 
-    <ul>
-        {% for recipe in recipes %}
-        <li>
-            <a href="/recipe/{{recipe.id}}"> {{ recipe.title }} </a>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="/">Home</a>
+<ul>
+    {% for recipe in recipes %}
+    <li>
+        <a href="/recipe/{{recipe.id}}"> {{ recipe.title }} </a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="/">Home</a>
+<br/>
+<br/>
+<button><a href='/login/'>Login</a></button>
+<button><a href='/logout/'>Logout</a></button>
