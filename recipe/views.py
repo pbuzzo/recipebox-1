@@ -87,7 +87,12 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
+            user = User.objects.create_user(
+                username=data['username'],
+                password=data['password']
+            )
             Author.objects.create(
+                user=user,
                 name=data['name'],
                 bio=data['bio']
             )
