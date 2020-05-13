@@ -67,34 +67,12 @@ def author(request, id):
                   {'author': person, 'recipes': recipes})
 
 
-# def authoradd(request):
-#     html = 'generic_form.html'
-#     if request.method == 'POST':
-#         form = AuthorAddForm(request.POST)
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             user = User.objects.create_user(
-#                 username=data['username'],
-#                 password=data['password']
-#             )
-#             Author.objects.create(
-#                 user=user,
-#                 name=data['name'],
-#                 bio=data['bio']
-#             )
-#             return HttpResponseRedirect(reverse('homepage'))
-
-#     form = AuthorAddForm()
-#     return render(request, html, {'form': form})
-
-
 @login_required
-def signup(request):
-    html = 'generic_form.html'
-
+def authoradd(request):
     if request.user.is_staff:
+        html = 'generic_form.html'
         if request.method == 'POST':
-            form = SignUpForm(request.POST)
+            form = AuthorAddForm(request.POST)
             if form.is_valid():
                 data = form.cleaned_data
                 user = User.objects.create_user(
@@ -107,6 +85,28 @@ def signup(request):
                     bio=data['bio']
                 )
                 return HttpResponseRedirect(reverse('homepage'))
+
+    form = AuthorAddForm()
+    return render(request, html, {'form': form})
+
+
+def signup(request):
+    html = 'generic_form.html'
+
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            user = User.objects.create_user(
+                username=data['username'],
+                password=data['password']
+            )
+            Author.objects.create(
+                user=user,
+                name=data['name'],
+                bio=data['bio']
+            )
+            return HttpResponseRedirect(reverse('homepage'))
 
     form = SignUpForm()
     return render(request, html, {'form': form})
