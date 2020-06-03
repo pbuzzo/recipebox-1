@@ -1,11 +1,22 @@
 <h1>🐝Qu33n B's Recipe Box🐝</h1>
 {{request.user.is_staff}}
+{{request.user}}
+{{favorites|length}}
 <ul>
     {% for item in data %}
         <li>
            <a href='/recipe/{{item.id}}'>{{ item.title }}</a> 
         </li>
+        {% if item in favorites%}
+        <button>
+            <a href='unfollow/{{item.author.id}}/'>Unfollow {{ item.author }}</a>
+        </button>
+        {% elif item not in favorites %}
+        <button>
+            <a href='follow/{{item.author.id}}/'>Follow {{ item.author }}</a>
+        </button>
         <br/>
+        {% endif %}
     {% endfor %}
 </ul>
 

@@ -31,6 +31,14 @@ def logoutview(request):
 
 def index(request):
     data = RecipeItem.objects.all()
+    authors = Author.objects.all()
+    recipes = RecipeItem.objects.all()
+    if request.user.is_authenticated:
+        current_author = Author.objects.get(name=request.user)
+        favs = [
+            item for item in recipes if item in current_author.favorites.all()
+        ]
+        return render(request, 'index.html', {'data': data, "favorites": favs})
     return render(request, 'index.html', {'data': data})
 
 
@@ -58,6 +66,33 @@ def recipeadd(request):
 
     form = RecipeAddForm()
     return render(request, html, {'form': form})
+
+
+
+def recipe_edit(request, id):
+    html = "generic_form.html"
+    recipe = RecipeItem.objects.get(id=id)
+    if request.method == "POST":
+        form = RecipeAddForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            recipe.title = data['title']
+            recipe.description = data['description']
+            recipe.author = data['author']
+            recipe.time_required = data['time_required']
+            recipe.instructions = data['instructions']
+            recipe.save()
+            return HttpResponseRedirect(reverse('recipe', args=(id,)))
+
+    form = RecipeAddForm(initial={
+        'title': recipe.title,
+        'description': recipe.description,
+        'author': recipe.author,
+        'time_required': recipe.time_required,
+        'instructions': recipe.instructions,
+    })
+    return render(request, html, {'form': form})
+
 
 
 def author(request, id):
@@ -88,6 +123,29 @@ def authoradd(request):
 
     form = AuthorAddForm()
     return render(request, html, {'form': form})
+
+
+@login_required
+def follow(request, id):
+    if request.user.is_authenticated:
+        recipe = RecipeItem.objects.get(id=id)
+        follower = Author.objects.get(name=request.user)
+        follower.favorites.add(recipe)
+        follower.save()
+
+    return HttpResponseRedirect(reverse('homepage'))
+
+
+@login_required
+def unfollow(request, id):
+    if request.user.is_authenticated:
+        recipe = RecipeItem.objects.get(id=id)
+        follower = Author.objects.get(name=request.user)
+        follower.favorites.remove(recipe)
+        follower.save()
+
+    return HttpResponseRedirect(reverse('homepage'))
+
 
 
 def signup(request):
